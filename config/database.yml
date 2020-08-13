@@ -79,11 +79,11 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
-  <<: *default
-  database: simple_payroll_app_production
-  username: simple_payroll_app
-  password: <%= ENV['SIMPLE_PAYROLL_APP_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+#
+# production:
+#   <<: *default
+#   database: simple_payroll_app_production
+#   username: simple_payroll_app
+#   password: <%= ENV['SIMPLE_PAYROLL_APP_DATABASE_PASSWORD'] %>
