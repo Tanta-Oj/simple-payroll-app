@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap/scss/bootstrap";
+
+// header
+header {
+  background-color: #2B669F;
+  .navbar-light .navbar-brand {
+    color: #fff;
+    font-size: 2rem;
+  }
+  .navbar-light .navbar-nav .active > .nav-link {
+    color: #fff;
+  }
+}
+
+// ログイン画面
+.container-login {
+  @extend .container-fluid;
+  max-width: 576px;
+  padding: 2rem;
+}
+
+// フラッシュ用スタイル
+.alert-notice {
+  @extend .alert-info;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+}
