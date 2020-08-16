@@ -10,4 +10,5 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     yarn
 WORKDIR /simple-payroll-app
 COPY Gemfile Gemfile.lock /simple-payroll-app/
-RUN bundle install
+RUN bundle config set git.allow_insecure true && \
+    bundle install

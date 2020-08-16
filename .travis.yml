@@ -7,6 +7,7 @@ before_install:
     - docker login -u "$HEROKU_USERNAME" -p "$HEROKU_API_KEY" registry.heroku.com
 
 script:
+    - docker-compose exec --env 'RAILS_ENV=test' web bundle install
     - docker-compose exec --env 'RAILS_ENV=test' web rails db:create
     - docker-compose exec --env 'RAILS_ENV=test' web rails db:migrate
     - docker-compose exec --env 'RAILS_ENV=test' web rails test
