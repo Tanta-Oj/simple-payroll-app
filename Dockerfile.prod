@@ -7,9 +7,12 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     nodejs \
     postgresql-client \
     tzdata \
-    yarn
+    yarn \
+    vim
 WORKDIR /simple-payroll-app
 COPY Gemfile Gemfile.lock /simple-payroll-app/
-RUN bundle install
+RUN bundle config set git.allow_insecure true && \
+    bundle install && \
+    yarn install
 COPY . .
 CMD [ "rails", "s" ]
