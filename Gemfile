@@ -34,6 +34,7 @@ gem 'devise', '~> 4.7.1'
 gem 'rails-i18n', '~> 6.0'
 gem 'devise-i18n'
 gem 'devise-bootstrap-views', '~> 1.0'
+gem "sprockets-rails", git: 'git://github.com/rails/sprockets-rails.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
