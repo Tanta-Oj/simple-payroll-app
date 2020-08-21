@@ -10,6 +10,7 @@ services:
             - '3000:3000'
         volumes:
             - '.:/simple-payroll-app'
+            - '/simple-payroll-app/node_modules'
         environment:
             - 'DATABASE_PASSWORD=postgres'
         tty: true
