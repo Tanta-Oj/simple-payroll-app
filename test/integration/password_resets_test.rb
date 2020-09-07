@@ -13,11 +13,11 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
 
   test "password resets" do
     get new_user_password_path
-    assert_template "devise/passwords/new"
+    assert_template "users/passwords/new"
 
     post user_password_path, params: { user: { email: "" } }
     assert_select "div.alert", :count => 1
-    assert_template "devise/passwords/new"
+    assert_template "users/passwords/new"
 
     post user_password_path, params: { user: { email: @user.email } }
     assert_equal 1, ActionMailer::Base.deliveries.size
@@ -31,7 +31,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     reset_password_token = @user.send_reset_password_instructions
     @user.reload
     get edit_user_password_path(reset_password_token: reset_password_token)
-    assert_template "devise/passwords/edit"
+    assert_template "users/passwords/edit"
 
     put user_password_path, params: { user: { reset_password_token:  reset_password_token,
                                               password:              "",

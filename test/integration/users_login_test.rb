@@ -11,7 +11,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test "login with valid emial/invalid password" do
     get new_user_session_path
-    assert_template "devise/sessions/new"
+    assert_template "users/sessions/new"
     post user_session_path params: { user: { email:    @confirmed_user.email,
                                              password: "invalid" } }
     assert_not user_signed_in?
