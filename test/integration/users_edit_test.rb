@@ -15,13 +15,13 @@ class UsersEditTest < ActionDispatch::IntegrationTest
                                              password: "password" } }
     assert user_signed_in?
     get edit_user_registration_path(@user)
-    assert_template "devise/registrations/edit"
+    assert_template "users/registrations/edit"
     new_name = ""
     put user_registration_path, params: { user: { name: new_name,
                                                   email: @user.email,
                                                   current_password: "password" } }
     assert_select "div.alert", count: 1
-    assert_template "devise/registrations/edit"
+    assert_template "users/registrations/edit"
     @user.reload
     assert_not new_name == @user.name
   end
@@ -33,7 +33,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
                                              password: "password" } }
     assert user_signed_in?
     get edit_user_registration_path(@user)
-    assert_template "devise/registrations/edit"
+    assert_template "users/registrations/edit"
     new_name = "new name"
     put user_registration_path, params: { user: { name: new_name,
                                                   email: @user.email,

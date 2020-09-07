@@ -10,13 +10,25 @@
           <li class="nav-item active">
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link' %>
           </li>
+          <li class="nav-item active">
+            <%= link_to "スタッフ登録", new_member_registration_path, class: 'nav-link' %>
+          </li>
       <% else %>
-          <li class="nav-item active">
-            <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "ログイン", new_user_session_path, class: 'nav-link' %>
-          </li>
+          <% if member_signed_in? %>
+            <li class="nav-item active">
+              <%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'nav-link' %>
+            </li>
+          <% else %>
+            <li class="nav-item active">
+              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to "管理者ログイン", new_user_session_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to "スタッフログイン", new_member_session_path, class: 'nav-link' %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>
