@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PasswordResetsTest < ActionDispatch::IntegrationTest
+class UsersPasswordResetsTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   include Devise::Controllers::Helpers
 

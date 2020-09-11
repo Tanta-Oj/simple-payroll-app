@@ -42,4 +42,20 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     @user.reload
     assert_equal new_name, @user.name
   end
+
+  test "successful destroy" do
+    get new_user_session_path
+    post user_session_path params: { user: { email:    @user.email,
+                                             password: "password" } }
+    assert user_signed_in?
+    get edit_user_registration_path(@user)
+    assert_template "users/registrations/edit"
+    delete user_registration_path
+    assert_redirected_to root_url
+
+    get new_user_session_path
+    post user_session_path params: { user: { email:    @user.email,
+                                             password: "password" } }
+    assert_select "div.alert", count: 1
+  end
 end
