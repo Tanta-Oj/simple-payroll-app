@@ -1,5 +1,5 @@
 <% flash.each do |msg_type, msg| %>
-  <% next if msg_type == "timeout" %>
+  <% next if msg_type == "timedout" %>
   <div class="alert alert-<%= msg_type %>" role="alert" id="alert">
     <a href="#" class="close" data-dismiss="alert">×</a>
     <%= msg %>
