@@ -69,7 +69,12 @@ protected
 
 private
     def member_params
-        params.require(:member).permit(:name, :email, :password, :password_confirmation)
+        params.require(:member).permit(:name, :email, :password, :password_confirmation,
+                                       :pay_type, :basic_pay,
+                                       :overtime_price, :holiday_price, :midnight_price,
+                                       :commutation_type, :commutation_tax, :commutation_nontax,
+                                       :normal_hours, :allowance_1, :allowance_2,
+                                       :allowance_3, :allowance_4, :allowance_5 )
     end
 end
   

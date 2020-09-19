@@ -1,1 +1,68 @@
 <%= render 'shared/flash_messages' %>
+
+<% if user_signed_in? || member_signed_in? %>
+    <div class="container-list">
+        <h1>スタッフ一覧</h1>
+
+        <div class="table-responsive text-nowrap">
+        <table class="table table-hover table-bordered table-fixed">
+            <thead class="thead-light">
+                <tr style="text-align:center">
+                    <th>No</th>
+                    <th><%= t("activerecord.attributes.member.name") %></th>
+                    <th><%= t("activerecord.attributes.member.email") %></th>
+                    <% if user_signed_in? %>
+                        <th><%= t("activerecord.attributes.member.pay_type") %></th>
+                        <th><%= t("activerecord.attributes.member.basic_pay") %></th>
+                        <th><%= t("activerecord.attributes.member.overtime_price") %></th>
+                        <th><%= t("activerecord.attributes.member.holiday_price") %></th>
+                        <th><%= t("activerecord.attributes.member.midnight_price") %></th>
+                        <th><%= t("activerecord.attributes.member.commutation_type") %></th>
+                        <th><%= t("activerecord.attributes.member.commutation_tax") %></th>
+                        <th><%= t("activerecord.attributes.member.commutation_nontax") %></th>
+                        <th><%= t("activerecord.attributes.member.normal_hours") %></th>
+                        <th><%= t("activerecord.attributes.member.allowance_1") %></th>
+                        <th><%= t("activerecord.attributes.member.allowance_2") %></th>
+                        <th><%= t("activerecord.attributes.member.allowance_3") %></th>
+                        <th><%= t("activerecord.attributes.member.allowance_4") %></th>
+                        <th><%= t("activerecord.attributes.member.allowance_5") %></th>
+                        <th></th>
+                    <% end %>
+                </tr>
+            </thead>
+            <tbody>
+                <% @no = 1 %>
+                <% @members.each do |member| %>
+                    <tr>
+                        <th style="text-align:right"><%= @no %></th>
+                        <th><%= member.name %></th>
+                        <th><%= member.email %></th>
+                        <% if user_signed_in? %>
+                            <td><%= member.pay_type %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.basic_pay, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.overtime_price, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.holiday_price, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.midnight_price, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <td><%= member.commutation_type %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.commutation_tax, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.commutation_nontax, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <td><%= member.normal_hours.strftime("%H:%M") unless member.normal_hours.nil? %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.allowance_1, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.allowance_2, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.allowance_3, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.allowance_4, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.allowance_5, precision: 30, strip_insignificant_zeros: true) %></td>
+                            <th style="text-align:center">
+                                <a href="/members/<%= @no - 1 %>/edit">
+                                    <div style="height:100%,width:100%">編集</div>
+                                </a>
+                            </th>
+                        <% end %>
+                    </tr>
+                    <% @no += 1 %>
+                <% end %>
+            </tbody>
+        </table>
+        </div>
+    </div>
+<% end %>

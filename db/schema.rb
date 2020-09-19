@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_145836) do
+ActiveRecord::Schema.define(version: 2020_09_15_164819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,20 @@ ActiveRecord::Schema.define(version: 2020_09_01_145836) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.integer "user_id"
+    t.string "pay_type"
+    t.float "basic_pay"
+    t.float "overtime_price"
+    t.float "holiday_price"
+    t.float "midnight_price"
+    t.string "commutation_type"
+    t.float "commutation_tax"
+    t.float "commutation_nontax"
+    t.time "normal_hours"
+    t.float "allowance_1"
+    t.float "allowance_2"
+    t.float "allowance_3"
+    t.float "allowance_4"
+    t.float "allowance_5"
     t.index ["confirmation_token"], name: "index_members_on_confirmation_token", unique: true
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true

@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  # devise_for :members, controllers: {
-  #   sessions:      "members/sessions",
-  #   passwords:     "members/passwords",
-  #   registrations: "members/registrations",
-  #   confirmations: "members/confirmations",
-  #   unlocks:       "members/unlocks"
-  # }
 
   devise_for :members, :pathn_prefix => "my", controllers: {
       sessions:      "members/sessions",
@@ -30,5 +23,8 @@ Rails.application.routes.draw do
 
 
   root 'pages#home'
+  get "/member/show" => "pages#member_show"
+
+  get "hinan" => "pages#hinan"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

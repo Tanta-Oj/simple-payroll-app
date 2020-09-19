@@ -4,27 +4,99 @@
   <%= form_for(@member) do |f| %>
     <%= bootstrap_member_error_messages! %>
 
-    <div class="form-group">
-      <%= f.label :name %>
+    <div class="form-group flexbox">
+      <div class="label"><%= f.label :name %></div>
       <%= f.text_field :name, autofocus: true, class: 'form-control' %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :email %>
+    <div class="form-group flexbox">
+      <div class="label"><%= f.label :email %></div>
       <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
     </div>
 
-        <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
+      <div class="form-group">
+      <div class="flexbox">
+      <div class="label"><%= f.label :password %></div>
+      <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
+      </div>
 
-        <small class="form-text text-muted"><%= t('members.registrations.edit.leave_blank_if_you_don_t_want_to_change_it') %></small>
-        </div>
+      <small class="form-text text-muted textright"><%= t('members.registrations.edit.leave_blank_if_you_don_t_want_to_change_it') %></small>
+      </div>
 
-        <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'  %>
-        </div>
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :password_confirmation %></div>
+      <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :pay_type %></div>
+      <%= f.select :pay_type, ["月給","日給","時給"], {include_blank: "選択してください"},class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :basic_pay %></div>
+      <%= f.number_field :basic_pay, step: :any, class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :overtime_price %></div>
+      <%= f.number_field :overtime_price, step: :any, class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :holiday_price %></div>
+      <%= f.number_field :holiday_price, step: :any, class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :midnight_price %></div>
+      <%= f.number_field :midnight_price, step: :any, class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :commutation_type %></div>
+      <%= f.select :commutation_type, ["月額","日額"], {include_blank: "選択してください"},class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :commutation_tax %></div>
+      <%= f.number_field :commutation_tax, step: :any, class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :commutation_nontax %></div>
+      <%= f.number_field :commutation_nontax, step: :any, class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :normal_hours %></div>
+      <%= f.time_select :normal_hours, {}, class: 'form-control timeselect'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :allowance_1 %></div>
+      <%= f.number_field :allowance_1, step: :any, class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :allowance_2 %></div>
+      <%= f.number_field :allowance_2, step: :any, class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :allowance_3 %></div>
+      <%= f.number_field :allowance_3, step: :any, class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :allowance_4 %></div>
+      <%= f.number_field :allowance_4, step: :any, class: 'form-control'  %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :allowance_5 %></div>
+      <%= f.number_field :allowance_5, step: :any, class: 'form-control'  %>
+      </div>
         
     <% if false %>
         <div class="form-group">
@@ -40,7 +112,7 @@
     </div>
   <% end %>
 
-  <hr class="devise-link my-5">
+  <hr class="devise-link my-4">
   <div class="form-group">
     <%= link_to "トップページ", root_path, class: 'btn btn-info btn-block mb-4' %>
     <%= link_to t('members.registrations.edit.cancel_my_account'), member_path(@member), data: {confirm: t('members.registrations.edit.are_you_sure')}, method: :delete, class: 'btn btn-danger btn-block' %>
