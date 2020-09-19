@@ -17,7 +17,7 @@ ja:
         locked_at: ロック時刻
         name: ユーザー名
         password: パスワード
-        password_confirmation: パスワード（確認用）
+        password_confirmation: パスワード確認
         remember_created_at: ログイン記憶時刻
         remember_me: ログインを記憶する
         reset_password_sent_at: パスワードリセット送信時刻
@@ -42,7 +42,7 @@ ja:
         locked_at: ロック時刻
         name: スタッフ名
         password: パスワード
-        password_confirmation: パスワード（確認用）
+        password_confirmation: パスワード確認
         remember_created_at: ログイン記憶時刻
         remember_me: ログインを記憶する
         reset_password_sent_at: パスワードリセット送信時刻
@@ -51,6 +51,20 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+        pay_type: 給与形態
+        basic_pay: 基本給
+        overtime_price: 残業単価(1.25)
+        holiday_price: 休日単価(1.35)
+        midnight_price: 深夜単価(0.25)
+        commutation_type: 交通費形態
+        commutation_tax: 課税交通費
+        commutation_nontax: 非課税交通費
+        normal_hours: 所定労働時間(日)
+        allowance_1: 手当(1)
+        allowance_2: 手当(2)
+        allowance_3: 手当(3)
+        allowance_4: 手当(4)
+        allowance_5: 手当(5)
     models:
       user: ユーザー
       member: スタッフ

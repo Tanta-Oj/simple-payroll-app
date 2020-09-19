@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+members = 1..30
+members.each do |member|
+    Member.create!(name: "member#{member}",
+                   email: "member#{member}@example.com",
+                   password: "password",
+                   password_confirmation: "password",
+                   confirmed_at: Time.now,
+                   user: User.find(1))
+end
