@@ -15,6 +15,7 @@ class PagesController < ApplicationController
     if member_signed_in?
       @member = current_member
     else
+      flash[:alert] = "スタッフとしてログインしてください"
       redirect_to new_member_session_url
     end
   end
