@@ -35,8 +35,4 @@ class PagesController < ApplicationController
       redirect_to new_member_session_url
     end
   end
-
-  def hinan
-    render "shared/_header"
-  end
 end
