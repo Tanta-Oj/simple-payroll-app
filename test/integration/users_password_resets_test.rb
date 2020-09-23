@@ -51,7 +51,7 @@ class UsersPasswordResetsTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_select "a[href=?]", new_user_registration_path
     assert_select "a[href=?]", new_user_session_path
-    assert_select "a[href=?]", edit_user_registration_path, count:0
+    assert_select "a[href=?]", user_show_path, count:0
     assert_select "a[href=?]", destroy_user_session_path, count:0
     get new_user_session_path
     post user_session_path params: { user: { email:    @user.email,
@@ -59,7 +59,7 @@ class UsersPasswordResetsTest < ActionDispatch::IntegrationTest
     get root_url
     assert_select "a[href=?]", new_user_registration_path, count:0
     assert_select "a[href=?]", new_user_session_path, count:0
-    assert_select "a[href=?]", edit_user_registration_path
+    assert_select "a[href=?]", user_show_path
     assert_select "a[href=?]", destroy_user_session_path
   end
 

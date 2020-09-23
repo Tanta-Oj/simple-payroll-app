@@ -7,5 +7,13 @@ class ApplicationController < ActionController::Base
         def configure_permitted_parameters
             devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
             devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+            devise_parameter_sanitizer.permit(:account_update, keys: [:closing_date])
+            devise_parameter_sanitizer.permit(:account_update, keys: [:payday])
+            devise_parameter_sanitizer.permit(:account_update, keys: [:basic_daily])
+            devise_parameter_sanitizer.permit(:account_update, keys: [:allowance_1])
+            devise_parameter_sanitizer.permit(:account_update, keys: [:allowance_2])
+            devise_parameter_sanitizer.permit(:account_update, keys: [:allowance_3])
+            devise_parameter_sanitizer.permit(:account_update, keys: [:allowance_4])
+            devise_parameter_sanitizer.permit(:account_update, keys: [:allowance_5])
         end
 end

@@ -1,0 +1,72 @@
+<%= render 'shared/flash_messages' %>
+
+
+<div class="container-show">
+    <h1>会社情報:(<%= @user.name %>)</h1>
+
+    <div class="table-responsive text-nowrap">
+    <table class="table table-striped">
+        <tr style="text-align:center">
+            <th><%= t("activerecord.attributes.user.name") %></th>
+            <td><%= @user.name %></td>
+        </tr>
+        <% if user_signed_in? %>
+            <tr style="text-align:center">
+                <th><%= t("activerecord.attributes.user.email") %></th>
+                <td><%= @user.email %></td>
+            </tr>
+        <% end %>
+        <% if @user.closing_date != 31 %>
+            <tr style="text-align:center">
+                <th><%= t("activerecord.attributes.user.closing_date") %></th>
+                <td><%= @user.closing_date %></td>
+            </tr>
+        <% else %>
+            <tr style="text-align:center">
+                <th><%= t("activerecord.attributes.user.closing_date") %></th>
+                <td>末日</td>
+            </tr>
+        <% end %>
+        <% if @user.payday != 31 %>
+            <tr style="text-align:center">
+                <th><%= t("activerecord.attributes.user.payday") %></th>
+                <td><%= @user.payday %></td>
+            </tr>
+        <% else %>
+            <tr style="text-align:center">
+                <th><%= t("activerecord.attributes.user.payday") %></th>
+                <td>末日</td>
+            </tr>
+        <% end %>
+        <tr style="text-align:center">
+            <th><%= t("activerecord.attributes.user.basic_daily") %></th>
+            <td><%= ActiveSupport::NumberHelper.number_to_rounded(@user.basic_daily, precision: 30, strip_insignificant_zeros: true) %></td>
+        </tr>
+        <tr style="text-align:center">
+            <th><%= t("activerecord.attributes.user.allowance_1") %></th>
+            <td><%= @user.allowance_1 %></td>
+        </tr>
+        <tr style="text-align:center">
+            <th><%= t("activerecord.attributes.user.allowance_2") %></th>
+            <td><%= @user.allowance_2 %></td>
+        </tr>
+        <tr style="text-align:center">
+            <th><%= t("activerecord.attributes.user.allowance_3") %></th>
+            <td><%= @user.allowance_3 %></td>
+        </tr>
+        <tr style="text-align:center">
+            <th><%= t("activerecord.attributes.user.allowance_4") %></th>
+            <td><%= @user.allowance_4 %></td>
+        </tr>
+        <tr style="text-align:center">
+            <th><%= t("activerecord.attributes.user.allowance_5") %></th>
+            <td><%= @user.allowance_5 %></td>
+        </tr>
+    </table>
+    <% if user_signed_in? %>
+        <div class="form-group width70">
+            <%= link_to "編集", edit_user_registration_path, class: 'btn btn-info btn-block mb-4' %>
+        </div>
+    <% end %>
+    </div>
+</div>

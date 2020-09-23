@@ -61,6 +61,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
+  def after_update_path_for(resource)
+    user_show_path
+  end
+
     def if_logged_in_member
       if member_signed_in?
         flash[:alert] = "スタッフはアクセスできません"

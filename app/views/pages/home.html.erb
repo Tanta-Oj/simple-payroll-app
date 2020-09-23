@@ -21,11 +21,31 @@
                         <th><%= t("activerecord.attributes.member.commutation_tax") %></th>
                         <th><%= t("activerecord.attributes.member.commutation_nontax") %></th>
                         <th><%= t("activerecord.attributes.member.normal_hours") %></th>
-                        <th><%= t("activerecord.attributes.member.allowance_1") %></th>
-                        <th><%= t("activerecord.attributes.member.allowance_2") %></th>
-                        <th><%= t("activerecord.attributes.member.allowance_3") %></th>
-                        <th><%= t("activerecord.attributes.member.allowance_4") %></th>
-                        <th><%= t("activerecord.attributes.member.allowance_5") %></th>
+                        <% if @user.allowance_1 == "" %>
+                            <th><%= t("activerecord.attributes.member.allowance_1") %></th>
+                        <% else %>
+                            <th><%= @user.allowance_1 %></th>
+                        <% end %>
+                        <% if @user.allowance_2 == "" %>
+                            <th><%= t("activerecord.attributes.member.allowance_2") %></th>
+                        <% else %>
+                            <th><%= @user.allowance_2 %></th>
+                        <% end %>
+                        <% if @user.allowance_3 == "" %>
+                            <th><%= t("activerecord.attributes.member.allowance_3") %></th>
+                        <% else %>
+                            <th><%= @user.allowance_3 %></th>
+                        <% end %>
+                        <% if @user.allowance_4 == "" %>
+                            <th><%= t("activerecord.attributes.member.allowance_4") %></th>
+                        <% else %>
+                            <th><%= @user.allowance_4 %></th>
+                        <% end %>
+                        <% if @user.allowance_5 == "" %>
+                            <th><%= t("activerecord.attributes.member.allowance_5") %></th>
+                        <% else %>
+                            <th><%= @user.allowance_5 %></th>
+                        <% end %>
                         <th></th>
                     <% end %>
                 </tr>

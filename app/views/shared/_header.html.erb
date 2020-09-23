@@ -5,7 +5,7 @@
       <ul class="navbar-nav">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to '会社情報編集', edit_user_registration_path, class: 'nav-link' %>
+            <%= link_to '会社情報', user_show_path, class: 'nav-link' %>
           </li>
           <li class="nav-item active">
             <%= link_to "スタッフ一覧", root_path, class: 'nav-link' %>
@@ -18,6 +18,9 @@
           </li>
       <% else %>
           <% if member_signed_in? %>
+            <li class="nav-item active">
+              <%= link_to '会社情報', user_show_path, class: 'nav-link' %>
+            </li>
             <li class="nav-item active">
               <%= link_to "スタッフ情報", member_show_path, class: 'nav-link' %>
             </li>

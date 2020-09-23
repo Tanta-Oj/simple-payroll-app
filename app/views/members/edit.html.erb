@@ -11,8 +11,78 @@
 
     <div class="form-group flexbox">
       <div class="label"><%= f.label :email %></div>
-      <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
+      <%= f.email_field :email, autocomplete: 'email', class: 'form-control' %>
     </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :pay_type %></div>
+      <%= f.select :pay_type, ["月給","日給","時給"], {include_blank: "選択してください"},class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :basic_pay %></div>
+      <%= f.number_field :basic_pay, step: :any, class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :overtime_price %></div>
+      <%= f.number_field :overtime_price, step: :any, class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :holiday_price %></div>
+      <%= f.number_field :holiday_price, step: :any, class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :midnight_price %></div>
+      <%= f.number_field :midnight_price, step: :any, class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :commutation_type %></div>
+      <%= f.select :commutation_type, ["月額","日額"], {include_blank: "選択してください"},class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :commutation_tax %></div>
+      <%= f.number_field :commutation_tax, step: :any, class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :commutation_nontax %></div>
+      <%= f.number_field :commutation_nontax, step: :any, class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :normal_hours %></div>
+      <%= f.time_select :normal_hours, {}, class: 'form-control timeselect' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :allowance_1 %></div>
+      <%= f.number_field :allowance_1, step: :any, class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :allowance_2 %></div>
+      <%= f.number_field :allowance_2, step: :any, class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :allowance_3 %></div>
+      <%= f.number_field :allowance_3, step: :any, class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :allowance_4 %></div>
+      <%= f.number_field :allowance_4, step: :any, class: 'form-control' %>
+      </div>
+
+      <div class="form-group flexbox">
+      <div class="label"><%= f.label :allowance_5 %></div>
+      <%= f.number_field :allowance_5, step: :any, class: 'form-control' %>
+      </div>
 
       <div class="form-group">
       <div class="flexbox">
@@ -28,76 +98,6 @@
       <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'  %>
       </div>
 
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :pay_type %></div>
-      <%= f.select :pay_type, ["月給","日給","時給"], {include_blank: "選択してください"},class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :basic_pay %></div>
-      <%= f.number_field :basic_pay, step: :any, class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :overtime_price %></div>
-      <%= f.number_field :overtime_price, step: :any, class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :holiday_price %></div>
-      <%= f.number_field :holiday_price, step: :any, class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :midnight_price %></div>
-      <%= f.number_field :midnight_price, step: :any, class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :commutation_type %></div>
-      <%= f.select :commutation_type, ["月額","日額"], {include_blank: "選択してください"},class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :commutation_tax %></div>
-      <%= f.number_field :commutation_tax, step: :any, class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :commutation_nontax %></div>
-      <%= f.number_field :commutation_nontax, step: :any, class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :normal_hours %></div>
-      <%= f.time_select :normal_hours, {}, class: 'form-control timeselect'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :allowance_1 %></div>
-      <%= f.number_field :allowance_1, step: :any, class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :allowance_2 %></div>
-      <%= f.number_field :allowance_2, step: :any, class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :allowance_3 %></div>
-      <%= f.number_field :allowance_3, step: :any, class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :allowance_4 %></div>
-      <%= f.number_field :allowance_4, step: :any, class: 'form-control'  %>
-      </div>
-
-      <div class="form-group flexbox">
-      <div class="label"><%= f.label :allowance_5 %></div>
-      <%= f.number_field :allowance_5, step: :any, class: 'form-control'  %>
-      </div>
-        
     <% if false %>
         <div class="form-group">
         <%= f.label :current_password %>
