@@ -47,14 +47,14 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", new_user_registration_path, count:0
     assert_select "a[href=?]", new_user_session_path, count:0
     assert_select "a[href=?]", new_member_session_path, count:0
-    assert_select "a[href=?]", edit_user_registration_path
+    assert_select "a[href=?]", user_show_path
     assert_select "a[href=?]", destroy_user_session_path
     delete destroy_user_session_path
     follow_redirect!
     assert_select "a[href=?]", new_user_registration_path
     assert_select "a[href=?]", new_user_session_path
     assert_select "a[href=?]", new_member_session_path
-    assert_select "a[href=?]", edit_user_registration_path, count:0
+    assert_select "a[href=?]", user_show_path, count:0
     assert_select "a[href=?]", destroy_user_session_path, count:0
   end
 end

@@ -14,3 +14,4 @@ tanaka:
     email: "tanaka@example.com"
     encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
     confirmed_at: <%= Time.now - 100 %>
+    allowance_1: "テスト手当"

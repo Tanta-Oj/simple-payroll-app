@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
 
   root 'pages#home'
+  get "/user/show" => "pages#user_show"
   get "/member/show" => "pages#member_show"
 
   get "hinan" => "pages#hinan"

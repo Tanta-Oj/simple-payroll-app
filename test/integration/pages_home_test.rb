@@ -15,6 +15,7 @@ class PagesHomeTest < ActionDispatch::IntegrationTest
     assert_match @member.name, response.body
     assert_match "基本給", response.body
     assert_match "編集", response.body
+    assert_match @user.allowance_1, response.body
     assert_select "a[href=?]", edit_member_path(id: 1)
   end
 
@@ -25,6 +26,7 @@ class PagesHomeTest < ActionDispatch::IntegrationTest
     assert_match @member.name, response.body
     assert_no_match "基本給", response.body
     assert_no_match "編集", response.body
+    assert_no_match @user.allowance_1, response.body
     assert_select "a[href=?]", edit_member_path(id: 1), count: 0
   end
 
