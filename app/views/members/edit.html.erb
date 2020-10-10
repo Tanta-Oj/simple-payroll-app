@@ -1,3 +1,5 @@
+<%= render 'shared/flash_messages' %>
+
 <div class="container-login">
   <h2><%= t('members.registrations.edit.title') %>:(<%= @member.name %>)</h2>
 
@@ -16,7 +18,7 @@
 
       <div class="form-group flexbox">
       <div class="label"><%= f.label :pay_type %></div>
-      <%= f.select :pay_type, ["月給","日給","時給"], {include_blank: "選択してください"},class: 'form-control' %>
+      <%= f.select :pay_type, [["月給",1],["日給",2],["時給",3]], {include_blank: "選択してください"}, class: 'form-control' %>
       </div>
 
       <div class="form-group flexbox">
@@ -41,7 +43,7 @@
 
       <div class="form-group flexbox">
       <div class="label"><%= f.label :commutation_type %></div>
-      <%= f.select :commutation_type, ["月額","日額"], {include_blank: "選択してください"},class: 'form-control' %>
+      <%= f.select :commutation_type, [["月額",1],["日額",2]], {include_blank: "選択してください"}, class: 'form-control' %>
       </div>
 
       <div class="form-group flexbox">
@@ -55,32 +57,54 @@
       </div>
 
       <div class="form-group flexbox">
-      <div class="label"><%= f.label :normal_hours %></div>
-      <%= f.time_select :normal_hours, {}, class: 'form-control timeselect' %>
+        <div class="label"><%= f.label :scheduled_hours %></div>
+        <%= f.select :scheduled_hours_h, [*0..24], {include_blank: "選択してください"}, class: 'form-control time_field' %>
+        <div class="colon">:</div>
+        <%= f.select :scheduled_hours_m, [*0..59], {include_blank: "選択してください"}, class: 'form-control time_field' %>
       </div>
 
       <div class="form-group flexbox">
-      <div class="label"><%= f.label :allowance_1 %></div>
+      <% if @user.allowance_1.nil? || @user.allowance_1 == "" %>
+        <div class="label"><%= f.label :allowance_1 %></div>
+      <% else %>
+        <div class="label"><%= f.label @user.allowance_1 %></div>
+      <% end %>
       <%= f.number_field :allowance_1, step: :any, class: 'form-control' %>
       </div>
 
       <div class="form-group flexbox">
-      <div class="label"><%= f.label :allowance_2 %></div>
+      <% if @user.allowance_2.nil? || @user.allowance_2 == "" %>
+        <div class="label"><%= f.label :allowance_2 %></div>
+      <% else %>
+        <div class="label"><%= f.label @user.allowance_2 %></div>
+      <% end %>
       <%= f.number_field :allowance_2, step: :any, class: 'form-control' %>
       </div>
 
       <div class="form-group flexbox">
-      <div class="label"><%= f.label :allowance_3 %></div>
+      <% if @user.allowance_3.nil? || @user.allowance_3 == "" %>
+        <div class="label"><%= f.label :allowance_3 %></div>
+      <% else %>
+        <div class="label"><%= f.label @user.allowance_3 %></div>
+      <% end %>
       <%= f.number_field :allowance_3, step: :any, class: 'form-control' %>
       </div>
 
       <div class="form-group flexbox">
-      <div class="label"><%= f.label :allowance_4 %></div>
+      <% if @user.allowance_4.nil? || @user.allowance_4 == "" %>
+        <div class="label"><%= f.label :allowance_4 %></div>
+      <% else %>
+        <div class="label"><%= f.label @user.allowance_4 %></div>
+      <% end %>
       <%= f.number_field :allowance_4, step: :any, class: 'form-control' %>
       </div>
 
       <div class="form-group flexbox">
-      <div class="label"><%= f.label :allowance_5 %></div>
+      <% if @user.allowance_5.nil? || @user.allowance_5 == "" %>
+        <div class="label"><%= f.label :allowance_5 %></div>
+      <% else %>
+        <div class="label"><%= f.label @user.allowance_5 %></div>
+      <% end %>
       <%= f.number_field :allowance_5, step: :any, class: 'form-control' %>
       </div>
 

@@ -1,0 +1,62 @@
+<%= render 'shared/flash_messages' %>
+
+<div class="container-edit-list">
+    <h2>勤怠データ</h2>
+    <%= form_with model: @user, url: user_path(@user.id), local: true do |f| %>
+    <%= bootstrap_user_error_messages! %>
+        <h3>共通事項</h3>
+        <div class="form-group flexbox">
+        <div class="label"><%= f.label :pay_year %></div>
+        <%= f.number_field :pay_year, autofocus: true, class: 'form-control' %>
+        </div>
+
+        <div class="form-group flexbox">
+        <div class="label"><%= f.label :pay_month %></div>
+        <%= f.number_field :pay_month, class: 'form-control' %>
+        </div>
+
+        <h3>個人事項</h3>
+        <div class="table-responsive text-nowrap">
+        <table class="table table-hover table-bordered table-fixed">
+            <thead class="thead-light">
+                <tr style="text-align:center">
+                    <th class="number">No</th>
+                    <th class="label"><%= f.label :member_name %></th>
+                    <th class="label"><%= f.label :workday %></th>
+                    <th class="label"><%= f.label :paid_holiday %></th>
+                    <th class="label"><%= f.label :leave_deduction %></th>
+                    <th class="label"><%= f.label :normal_hours %></th>
+                    <th class="label"><%= f.label :overtime_hours %></th>
+                    <th class="label"><%= f.label :holiday_hours %></th>
+                    <th class="label"><%= f.label :midnight_hours %></th>
+                    <th class="label"><%= f.label :late_early %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @no = 1 %>
+                <% @user.members.each do |member| %>
+                        <%= f.fields_for :members do |m| %>
+                            <%= m.hidden_field :id %>
+                            <tr>
+                                <th style="text-align:right"><%= @no %></th>
+                                <th><%= member.name %></th>
+                                <td><%= m.number_field :workday, step: :any, class: 'form-control' %></td>
+                                <td><%= m.number_field :paid_holiday, step: :any, class: 'form-control' %></td>
+                                <td><%= m.number_field :leave_deduction, step: :any, class: 'form-control' %></td>
+                                <td><div class="time-td"><%= m.number_field :normal_hours_h, class: 'form-control time-field' %><div class="colon">:</div><%= m.number_field :normal_hours_m, class: 'form-control time-field' %></div></td>
+                                <td><div class="time-td"><%= m.number_field :overtime_hours_h, class: 'form-control time-field' %><div class="colon">:</div><%= m.number_field :overtime_hours_m, class: 'form-control time-field' %></div></td>
+                                <td><div class="time-td"><%= m.number_field :holiday_hours_h, class: 'form-control time-field' %><div class="colon">:</div><%= m.number_field :holiday_hours_m, class: 'form-control time-field' %></div></td>
+                                <td><div class="time-td"><%= m.number_field :midnight_hours_h, class: 'form-control time-field' %><div class="colon">:</div><%= m.number_field :midnight_hours_m, class: 'form-control time-field' %></div></td>
+                                <td><div class="time-td"><%= m.number_field :late_early_h, class: 'form-control time-field' %><div class="colon">:</div><%= m.number_field :late_early_m, class: 'form-control time-field' %></div></td>
+                            </tr>
+                            <% @no += 1 %>
+                        <% end %>
+                <% end %>
+            </tbody>
+        </table>
+        </div>
+        <div class="form-group">
+            <%= f.submit t('users.registrations.edit.update'), class: 'btn btn-primary btn-block' %>
+        </div>
+    <% end %>
+</div>

@@ -52,8 +52,6 @@ class MembersSignupTest < ActionDispatch::IntegrationTest
                                                          password_confirmation: "password",
                                                          user:                  @user } }
     end
-    assert_equal 1, ActionMailer::Base.deliveries.size
-    assert_not member_signed_in?
   end
 
   test "valid signup information with confirmed" do

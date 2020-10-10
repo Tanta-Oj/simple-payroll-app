@@ -78,7 +78,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
  
     sign_in @user
-    get new_user_confirmation_path
+    get new_user_confirmation_path(@user)
     assert_response :success
   end
 
@@ -114,4 +114,25 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
+  # 勤怠データ表示
+  test "should get user-members show" do
+    get user_path(@user)
+    assert_not flash.empty?
+    assert_redirected_to new_user_session_url
+
+    sign_in @user
+    get user_path(@user)
+    assert_response :success
+  end
+
+  # 勤怠データ編集
+  test "should get user-members edit" do
+    get edit_user_path(@user)
+    assert_not flash.empty?
+    assert_redirected_to new_user_session_url
+
+    sign_in @user
+    get edit_user_path(@user)
+    assert_response :success
+  end
 end

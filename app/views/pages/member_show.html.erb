@@ -16,7 +16,18 @@
         </tr>
         <tr style="text-align:center">
             <th><%= t("activerecord.attributes.member.pay_type") %></th>
-            <td><%= @member.pay_type %></td>
+            <% if @member.pay_type == 1 %>
+                <td>月給</td>
+            <% end %>
+            <% if @member.pay_type == 2 %>
+                <td>日給</td>
+            <% end %>
+            <% if @member.pay_type == 3 %>
+                <td>時給</td>
+            <% end %>
+            <% if @member.pay_type == "" || @member.pay_type == nil %>
+                <td></td>
+            <% end %>
         </tr>
         <tr style="text-align:center">
             <th><%= t("activerecord.attributes.member.basic_pay") %></th>
@@ -36,7 +47,15 @@
         </tr>
         <tr style="text-align:center">
             <th><%= t("activerecord.attributes.member.commutation_type") %></th>
-            <td><%= @member.commutation_type %></td>
+            <% if @member.commutation_type == 1 %>
+                <td>月額</td>
+            <% end %>
+            <% if @member.commutation_type == 2 %>
+                <td>日額</td>
+            <% end %>
+            <% if @member.commutation_type == "" || @member.commutation_type == nil %>
+                <td></td>
+            <% end %>
         </tr>
         <tr style="text-align:center">
             <th><%= t("activerecord.attributes.member.commutation_tax") %></th>
@@ -47,11 +66,21 @@
             <td><%= ActiveSupport::NumberHelper.number_to_rounded(@member.commutation_nontax, precision: 30, strip_insignificant_zeros: true) %></td>
         </tr>
         <tr style="text-align:center">
-            <th><%= t("activerecord.attributes.member.normal_hours") %></th>
-            <td><%= @member.normal_hours.strftime("%H:%M") unless @member.normal_hours.nil? %></td>
+            <th><%= t("activerecord.attributes.member.scheduled_hours") %></th>
+            <% if @member.scheduled_hours_h.nil? || @member.scheduled_hours_h == "" and @member.scheduled_hours_m.nil? || @member.scheduled_hours_m == "" %>
+                <td></td>
+            <% else %>
+                <% if @member.scheduled_hours_h.nil? || @member.scheduled_hours_h == "" %>
+                    <% @member.scheduled_hours_h = 0 %>
+                <% end %>
+                <% if @member.scheduled_hours_m.nil? || @member.scheduled_hours_m == "" %>
+                    <% @member.scheduled_hours_m = 0 %>
+                <% end %>
+                <td><%= "#{sprintf("%.2d", @member.scheduled_hours_h)}:#{sprintf("%.2d", @member.scheduled_hours_m)}" %></td>
+            <% end %>
         </tr>
         <tr style="text-align:center">
-            <% if @user.allowance_1 == "" %>
+            <% if @user.allowance_1 == "" || @user.allowance_1 == nil %>
                 <th><%= t("activerecord.attributes.member.allowance_1") %></th>
             <% else %>
                 <th><%= @user.allowance_1 %></th>
@@ -59,7 +88,7 @@
             <td><%= ActiveSupport::NumberHelper.number_to_rounded(@member.allowance_1, precision: 30, strip_insignificant_zeros: true) %></td>
         </tr>
         <tr style="text-align:center">
-            <% if @user.allowance_2 == "" %>
+            <% if @user.allowance_2 == "" || @user.allowance_2 == nil %>
                 <th><%= t("activerecord.attributes.member.allowance_2") %></th>
             <% else %>
                 <th><%= @user.allowance_2 %></th>
@@ -67,7 +96,7 @@
             <td><%= ActiveSupport::NumberHelper.number_to_rounded(@member.allowance_2, precision: 30, strip_insignificant_zeros: true) %></td>
         </tr>
         <tr style="text-align:center">
-            <% if @user.allowance_3 == "" %>
+            <% if @user.allowance_3 == "" || @user.allowance_3 == nil %>
                 <th><%= t("activerecord.attributes.member.allowance_3") %></th>
             <% else %>
                 <th><%= @user.allowance_3 %></th>
@@ -75,7 +104,7 @@
             <td><%= ActiveSupport::NumberHelper.number_to_rounded(@member.allowance_3, precision: 30, strip_insignificant_zeros: true) %></td>
         </tr>
         <tr style="text-align:center">
-            <% if @user.allowance_4 == "" %>
+            <% if @user.allowance_4 == "" || @user.allowance_4 == nil %>
                 <th><%= t("activerecord.attributes.member.allowance_4") %></th>
             <% else %>
                 <th><%= @user.allowance_4 %></th>
@@ -83,7 +112,7 @@
             <td><%= ActiveSupport::NumberHelper.number_to_rounded(@member.allowance_4, precision: 30, strip_insignificant_zeros: true) %></td>
         </tr>
         <tr style="text-align:center">
-            <% if @user.allowance_5 == "" %>
+            <% if @user.allowance_5 == "" || @user.allowance_5 == nil %>
                 <th><%= t("activerecord.attributes.member.allowance_5") %></th>
             <% else %>
                 <th><%= @user.allowance_5 %></th>

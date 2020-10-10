@@ -13,13 +13,14 @@ Rails.application.routes.draw do
     get "/members/sign_out", to: "members/sessions#destroy", as: :member_logout
   end
 
-  devise_for :users, controllers: {
+  devise_for :users, :pathn_prefix => "my", controllers: {
     sessions:      "users/sessions",
     passwords:     "users/passwords",
     registrations: "users/registrations",
     confirmations: "users/confirmations",
     unlocks:       "users/unlocks"
   }
+  resources :users
 
 
   root 'pages#home'

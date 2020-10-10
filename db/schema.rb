@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_162600) do
+ActiveRecord::Schema.define(version: 2020_09_28_134122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,20 +37,34 @@ ActiveRecord::Schema.define(version: 2020_09_21_162600) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.integer "user_id"
-    t.string "pay_type"
+    t.integer "pay_type"
     t.float "basic_pay"
     t.float "overtime_price"
     t.float "holiday_price"
     t.float "midnight_price"
-    t.string "commutation_type"
+    t.integer "commutation_type"
     t.float "commutation_tax"
     t.float "commutation_nontax"
-    t.time "normal_hours"
     t.float "allowance_1"
     t.float "allowance_2"
     t.float "allowance_3"
     t.float "allowance_4"
     t.float "allowance_5"
+    t.integer "scheduled_hours_h"
+    t.integer "scheduled_hours_m"
+    t.float "workday"
+    t.float "paid_holiday"
+    t.float "leave_deduction"
+    t.integer "normal_hours_h"
+    t.integer "normal_hours_m"
+    t.integer "overtime_hours_h"
+    t.integer "overtime_hours_m"
+    t.integer "holiday_hours_h"
+    t.integer "holiday_hours_m"
+    t.integer "midnight_hours_h"
+    t.integer "midnight_hours_m"
+    t.integer "late_early_h"
+    t.integer "late_early_m"
     t.index ["confirmation_token"], name: "index_members_on_confirmation_token", unique: true
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
@@ -86,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_09_21_162600) do
     t.string "allowance_3"
     t.string "allowance_4"
     t.string "allowance_5"
+    t.integer "pay_year"
+    t.integer "pay_month"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

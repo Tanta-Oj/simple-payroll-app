@@ -1,0 +1,121 @@
+<%= render 'shared/flash_messages' %>
+
+<div class="container-show-list">
+    <h2>勤怠データ</h2>
+    <%= bootstrap_user_error_messages! %>
+
+    <h3>共通事項</h3>
+    <div class="table-responsive text-nowrap width30">
+        <table class="table table-bordered table-fixed">
+            <tbody>
+                <tr>
+                    <th><%= t("activerecord.attributes.user.pay_year") %></th>
+                    <td><%= @user.pay_year %></td>
+                </tr>
+                <tr>
+                    <th><%= t("activerecord.attributes.user.pay_month") %></th>
+                    <td><%= @user.pay_month %></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>個人事項</h3>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover table-bordered table-fixed">
+            <thead class="thead-light">
+                <tr style="text-align:center">
+                    <th>No</th>
+                    <th><%= t("activerecord.attributes.user.member_name") %></th>
+                    <th><%= t("activerecord.attributes.user.workday") %></th>
+                    <th><%= t("activerecord.attributes.user.paid_holiday") %></th>
+                    <th><%= t("activerecord.attributes.user.leave_deduction") %></th>
+                    <th><%= t("activerecord.attributes.user.normal_hours") %></th>
+                    <th><%= t("activerecord.attributes.user.overtime_hours") %></th>
+                    <th><%= t("activerecord.attributes.user.holiday_hours") %></th>
+                    <th><%= t("activerecord.attributes.user.midnight_hours") %></th>
+                    <th><%= t("activerecord.attributes.user.late_early") %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @no = 1 %>
+                <% @user.members.each do |member| %>
+                    <tr>
+                        <th style="text-align:right"><%= @no %></th>
+                        <th><%= member.name %></th>
+                        <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.workday, precision: 30, strip_insignificant_zeros: true) %></td>
+                        <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.paid_holiday, precision: 30, strip_insignificant_zeros: true) %></td>
+                        <td><%= ActiveSupport::NumberHelper.number_to_rounded(member.leave_deduction, precision: 30, strip_insignificant_zeros: true) %></td>
+                        <% if member.normal_hours_h.nil? || member.normal_hours_h == "" and member.normal_hours_m.nil? || member.normal_hours_m == "" %>
+                                <td></td>
+                        <% else %>
+                            <% if member.normal_hours_h.nil? || member.normal_hours_h == "" %>
+                                <% member.normal_hours_h = 0 %>
+                            <% end %>
+                            <% if member.normal_hours_m.nil? || member.normal_hours_m == "" %>
+                                <% member.normal_hours_m = 0 %>
+                            <% end %>
+                            <td><%= "#{sprintf("%.2d", member.normal_hours_h)}:#{sprintf("%.2d", member.normal_hours_m)}" %></td>
+                        <% end %>
+                        <% if member.overtime_hours_h.nil? || member.overtime_hours_h == "" and member.overtime_hours_m.nil? || member.overtime_hours_m == "" %>
+                            <td></td>
+                        <% else %>
+                            <% if member.overtime_hours_h.nil? || member.overtime_hours_h == "" %>
+                                <% member.overtime_hours_h = 0 %>
+                            <% end %>
+                            <% if member.overtime_hours_m.nil? || member.overtime_hours_m == "" %>
+                                <% member.overtime_hours_m = 0 %>
+                            <% end %>
+                            <td><%= "#{sprintf("%.2d", member.overtime_hours_h)}:#{sprintf("%.2d", member.overtime_hours_m)}" %></td>
+                        <% end %>
+                        <% if member.holiday_hours_h.nil? || member.holiday_hours_h == "" and member.holiday_hours_m.nil? || member.holiday_hours_m == "" %>
+                            <td></td>
+                        <% else %>
+                            <% if member.holiday_hours_h.nil? || member.holiday_hours_h == "" %>
+                                <% member.holiday_hours_h = 0 %>
+                            <% end %>
+                            <% if member.holiday_hours_m.nil? || member.holiday_hours_m == "" %>
+                                <% member.holiday_hours_m = 0 %>
+                            <% end %>
+                            <td><%= "#{sprintf("%.2d", member.holiday_hours_h)}:#{sprintf("%.2d", member.holiday_hours_m)}" %></td>
+                        <% end %>
+                        <% if member.midnight_hours_h.nil? || member.midnight_hours_h == "" and member.midnight_hours_m.nil? || member.midnight_hours_m == "" %>
+                            <td></td>
+                        <% else %>
+                            <% if member.midnight_hours_h.nil? || member.midnight_hours_h == "" %>
+                                <% member.midnight_hours_h = 0 %>
+                            <% end %>
+                            <% if member.midnight_hours_m.nil? || member.midnight_hours_m == "" %>
+                                <% member.midnight_hours_m = 0 %>
+                            <% end %>
+                            <td><%= "#{sprintf("%.2d", member.midnight_hours_h)}:#{sprintf("%.2d", member.midnight_hours_m)}" %></td>
+                        <% end %>
+                        <% if member.late_early_h.nil? || member.late_early_h == "" and member.late_early_m.nil? || member.late_early_m == "" %>
+                            <td></td>
+                        <% else %>
+                            <% if member.late_early_h.nil? || member.late_early_h == "" %>
+                                <% member.late_early_h = 0 %>
+                            <% end %>
+                            <% if member.late_early_m.nil? || member.late_early_m == "" %>
+                                <% member.late_early_m = 0 %>
+                            <% end %>
+                            <td><%= "#{sprintf("%.2d", member.late_early_h)}:#{sprintf("%.2d", member.late_early_m)}" %></td>
+                        <% end %>
+                    </tr>
+                    <% @no += 1 %>
+                <% end %>
+            </tbody>
+        </table>
+    </table>
+    </div>
+    <div class="width70 flex">
+        <div class="width5"></div>
+        <div class="form-group width45">
+            <%= link_to "編集", edit_user_path, class: 'btn btn-primary btn-block' %>
+        </div>
+        <div class="width5"></div>
+        <div class="form-group width45">
+            <%= link_to "給与計算", edit_user_path, class: 'btn btn-info btn-block' %>
+        </div>
+    </div>
+</div>
