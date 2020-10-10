@@ -11,6 +11,9 @@
             <%= link_to "スタッフ一覧", root_path, class: 'nav-link' %>
           </li>
           <li class="nav-item active">
+            <%= link_to "勤怠データ", user_path(current_user.id), class: 'nav-link' %>
+          </li>
+          <li class="nav-item active">
             <%= link_to "スタッフ登録", new_member_registration_path, class: 'nav-link' %>
           </li>
           <li class="nav-item active">

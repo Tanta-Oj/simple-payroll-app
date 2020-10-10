@@ -18,5 +18,7 @@ module SimplePayrollApp
     config.i18n.default_locale = :ja
     config.time_zone = 'Asia/Tokyo'
     config.active_record.default_timezone = :utc
+
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
   end
 end

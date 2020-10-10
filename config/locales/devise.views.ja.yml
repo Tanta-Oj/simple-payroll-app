@@ -34,6 +34,17 @@ ja:
         allowance_3: 手当名(3)
         allowance_4: 手当名(4)
         allowance_5: 手当名(5)
+        pay_year: 支給年
+        pay_month: 支給月
+        member_name: スタッフ名
+        workday: 出勤日数
+        paid_holiday: 有給日数
+        leave_deduction: 欠勤日数
+        normal_hours: 労働時間(所定内)
+        overtime_hours: 残業時間(1.25)
+        holiday_hours: 休日時間(1.35)
+        midnight_hours: 深夜時間(0.25)
+        late_early: 遅早時間
       member:
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
@@ -67,12 +78,28 @@ ja:
         commutation_type: 交通費形態
         commutation_tax: 課税交通費
         commutation_nontax: 非課税交通費
-        normal_hours: 所定労働時間(日)
+        scheduled_hours: 所定労働時間(日)
+        scheduled_hours_h: 所定労働時間(日)/時
+        scheduled_hours_m: 所定労働時間(日)/分
         allowance_1: 手当(1)
         allowance_2: 手当(2)
         allowance_3: 手当(3)
         allowance_4: 手当(4)
         allowance_5: 手当(5)
+      members:
+        workday: 出勤日数
+        paid_holiday: 有給日数
+        leave_deduction: 欠勤日数
+        normal_hours_h: 労働時間(所定内)/時
+        overtime_hours_h: 残業時間(1.25)/時
+        holiday_hours_h: 休日時間(1.35)/時
+        midnight_hours_h: 深夜時間(0.25)/時
+        late_early_h: 遅早時間/時
+        normal_hours_m: 労働時間(所定内)/分
+        overtime_hours_m: 残業時間(1.25)/分
+        holiday_hours_m: 休日時間(1.35)/分
+        midnight_hours_m: 深夜時間(0.25)/分
+        late_early_m: 遅早時間/分
     models:
       user: ユーザー
       member: スタッフ

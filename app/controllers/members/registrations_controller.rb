@@ -38,7 +38,6 @@ class Members::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   # def edit
-    # @member = Member.find(current_user.members[params[:id]-1].id)
   #   super
   # end
 
