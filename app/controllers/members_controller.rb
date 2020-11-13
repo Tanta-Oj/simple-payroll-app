@@ -38,8 +38,10 @@ class MembersController < ApplicationController
 
     def destroy
         @user = current_user
-        Member.find(params[:id]).destroy
-        flash[:success] = "スタッフを削除しました"
+        if @user.id == Member.find(params[:id]).user_id
+            Member.find(params[:id]).destroy
+            flash[:success] = "スタッフを削除しました"
+        end
         redirect_to root_url
     end
 

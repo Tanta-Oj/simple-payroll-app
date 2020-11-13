@@ -16,12 +16,17 @@
 
     <div class="form-group flexbox">
       <div class="label"><%= f.label :closing_date %></div>
-      <%= f.select :closing_date, [*1..28,["末日",31]], {include_blank: "選択してください"},class: 'form-control' %>
+      <%= f.select :closing_date, [*1..27,["末日",31]], {include_blank: "選択してください"},class: 'form-control' %>
     </div>
 
     <div class="form-group flexbox">
       <div class="label"><%= f.label :payday %></div>
-      <%= f.select :payday, [*1..28,["末日",31]], {include_blank: "選択してください"},class: 'form-control' %>
+      <%= f.select :payday, [*1..27,["末日",31]], {include_blank: "選択してください"},class: 'form-control' %>
+    </div>
+
+    <div class="form-group flexbox">
+      <div class="label"><%= f.label :paymonth %></div>
+      <%= f.select :paymonth, [["当月",1,],["翌月",2,]], {include_blank: "選択してください"},class: 'form-control' %>
     </div>
 
     <div class="form-group flexbox">

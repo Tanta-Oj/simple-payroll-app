@@ -2,7 +2,7 @@
 
 <% if user_signed_in? || member_signed_in? %>
     <div class="container-list">
-        <h1>スタッフ一覧</h1>
+        <h2>スタッフ一覧</h2>
         <% if @members.count == 0 %>
             <a href="/members/sign_up">スタッフを登録してください</a>
         <% end %>

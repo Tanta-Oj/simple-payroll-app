@@ -11,7 +11,10 @@
             <%= link_to "スタッフ一覧", root_path, class: 'nav-link' %>
           </li>
           <li class="nav-item active">
-            <%= link_to "勤怠データ", user_path(current_user.id), class: 'nav-link' %>
+            <%= link_to "給与計算", user_path(current_user.id), class: 'nav-link' %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "給与データ", payroll_show_path, class: 'nav-link' %>
           </li>
           <li class="nav-item active">
             <%= link_to "スタッフ登録", new_member_registration_path, class: 'nav-link' %>
@@ -29,6 +32,9 @@
             </li>
             <li class="nav-item active">
               <%= link_to "スタッフ一覧", root_path, class: 'nav-link' %>
+            </li>
+              <li class="nav-item active">
+              <%= link_to "給与明細", payroll_show_path, class: 'nav-link' %>
             </li>
             <li class="nav-item active">
               <%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'nav-link' %>

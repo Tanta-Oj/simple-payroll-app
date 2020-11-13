@@ -1,0 +1,299 @@
+<%= render 'shared/flash_messages' %>
+
+<% if user_signed_in? %>
+<div class="container-payrollsshow">
+    <h2>給与データ一覧</h2>
+    <h3>支給日選択</h3>
+    <%= form_tag(payroll_show_path, :method => "get") do %>
+        <%=  select_tag :choice, options_for_select(@pay_days),class: 'form-control width30' %>
+        <%= hidden_field_tag :userid, current_user.id %>
+        <%= submit_tag "表示", :name => nil, class: 'btn btn-primary btn-block' %>
+    <% end %>
+    <hr class="border-darl my-4">
+    <% if @payrolls.count > 0 %>
+    <h3>共通事項</h3>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-bordered table-fixed">
+            <tbody>
+                <tr>
+                    <th class="textcenter">支給年月日</th>
+                    <td><%= @payrolls.first.pay_day %></td>
+                
+                <% if @payrolls.first.stating_day != nil && @payrolls.first.stating_day != "" %>
+                        <th class="textcenter">自</th>
+                        <td><%= @payrolls.first.stating_day %></td>
+                <% end %>
+                <% if @payrolls.first.closing_day != nil && @payrolls.first.closing_day != "" %>
+                        <th class="textcenter">至</th>
+                        <td><%= @payrolls.first.closing_day %></td>
+                <% end %>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>個人事項</h3>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover table-bordered table-fixed  payrolllist">
+            <thead class="thead-light">
+                <tr style="text-align:center">
+                    <th class="number">No</th>
+                    <th class="label">スタッフ名</th>
+                    <th class="label">基本給</th>
+                    <th class="label">残業手当</th>
+                    <th class="label">休日手当</th>
+                    <th class="label">深夜手当</th>
+                    <% if @payrolls.first.allowance_name_1 == nil? || @payrolls.first.allowance_name_1 == "" %>
+                        <th class="label">手当(1)</th>
+                    <% else %>
+                        <th class="label"><%= @payrolls.first.allowance_name_1 %></th>
+                    <% end %>
+                    <% if @payrolls.first.allowance_name_2 == nil? || @payrolls.first.allowance_name_2 == "" %>
+                        <th class="label">手当(2)</th>
+                    <% else %>
+                        <th class="label"><%= @payrolls.first.allowance_name_2 %></th>
+                    <% end %>
+                    <% if @payrolls.first.allowance_name_3 == nil? || @payrolls.first.allowance_name_3 == "" %>
+                        <th class="label">手当(3)</th>
+                    <% else %>
+                        <th class="label"><%= @payrolls.first.allowance_name_3 %></th>
+                    <% end %>
+                    <% if @payrolls.first.allowance_name_4 == nil? || @payrolls.first.allowance_name_4 == "" %>
+                        <th class="label">手当(4)</th>
+                    <% else %>
+                        <th class="label"><%= @payrolls.first.allowance_name_4 %></th>
+                    <% end %>
+                    <% if @payrolls.first.allowance_name_5 == nil? || @payrolls.first.allowance_name_5 == "" %>
+                        <th class="label">手当(5)</th>
+                    <% else %>
+                        <th class="label"><%= @payrolls.first.allowance_name_5 %></th>
+                    <% end %>
+                    <th class="label">課税通勤手当</th>
+                    <th class="label">非課税通勤手当</th>
+                    <th class="label">有給休暇手当</th>
+                    <th class="label">欠勤控除</th>
+                    <th class="label">遅早控除</th>
+                    <th class="label">出勤日数</th>
+                    <th class="label">有給休暇日数</th>
+                    <th class="label">欠勤日数</th>
+                    <th class="label">労働時間(所定内)</th>
+                    <th class="label">残業時間(1.25)</th>
+                    <th class="label">休日時間(1.35)</th>
+                    <th class="label">深夜時間(0.25)</th>
+                    <th class="label">遅早時間</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @no = 1 %>
+                <% @payrolls.each do |payroll| %>
+                    <tr>
+                        <th style="text-align:right"><%= @no %></td>
+                        <th><%= payroll.member_name %></td>
+                        <td><%= payroll.basic_salary %></td>
+                        <td><%= payroll.overtime_allowance %></td>
+                        <td><%= payroll.holiday_allowance %></td>
+                        <td><%= payroll.midnight_allowance %></td>
+                        <td><%= payroll.allowance_1 %></td>
+                        <td><%= payroll.allowance_2 %></td>
+                        <td><%= payroll.allowance_3 %></td>
+                        <td><%= payroll.allowance_4 %></td>
+                        <td><%= payroll.allowance_5 %></td>
+                        <td><%= payroll.commutation_allowance_tax %></td>
+                        <td><%= payroll.commutation_allowance_nontax %></td>
+                        <td><%= payroll.paid_holiday_allowance %></td>
+                        <td><%= payroll.leave_deduction_price %></td>
+                        <td><%= payroll.late_early_price %></td>
+                        <td><%= payroll.workday %></td>
+                        <td><%= payroll.paid_holiday %></td>
+                        <td><%= payroll.leave_deduction %></td>
+                        <td><%= payroll.normal_hours %></td>
+                        <td><%= payroll.overtime_hours %></td>
+                        <td><%= payroll.holiday_hours %></td>
+                        <td><%= payroll.midnight_hours %></td>
+                        <td><%= payroll.late_early %></td>
+                        <th style="text-align:center">
+                            <a href= <%= "/payrolls/#{payroll.id}" %>>
+                                <div style="height:100%,width:100%">明細</div>
+                            </a>
+                        </th>
+                        <th style="text-align:center">
+                            <%= link_to(payroll_path(id: payroll.id), data: "削除しますが、よろしいですか", method: :delete) do %>
+                                <div style="height:100%,width:100%">削除</div>
+                            <% end %>
+                        </th>
+                    </tr>
+                    <% @no += 1 %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <% end %>
+</div>
+<% end %>
+
+
+<% if member_signed_in? %>
+<div class="container-payrollshow">
+    <h3>支給日選択</h3>
+    <%= form_tag(payroll_show_path, :method => "get") do %>
+        <%=  select_tag :choice, options_for_select(@pay_days),class: 'form-control width30' %>
+        <%= hidden_field_tag :memberid, current_member.id %>
+        <%= submit_tag "表示", :name => nil, class: 'btn btn-primary btn-block' %>
+    <% end %>
+    <hr class="border-darl my-4">
+    <% if @payrolls.count > 0 %>
+    <% @no = 0 %>
+    <% @payrolls.each do |payroll| %>
+        <% if @no > 0  %>
+            <hr class="border-darl my-4">
+        <% end %>
+
+        <h2 class="textcenter">給与明細</h2>
+        <h2><%= payroll.member_name %> 様</h2>
+        <h2 class="textright"><%= payroll.user_name %></h2>
+
+        <div class="table-responsive text-nowrap">
+            <table class="table table-bordered table-fixed">
+                <tbody>
+                    <tr>
+                        <th>支給年月日</th>
+                        <td><%= payroll.pay_day %></td>
+                        <% if payroll.stating_day != nil && payroll.stating_day != "" %>
+                            <th>自</th>
+                            <td><%= payroll.stating_day %></td>
+                        <% end %>
+                        <% if payroll.closing_day != nil && payroll.closing_day != "" %>
+                            <th>至</th>
+                            <td><%= payroll.closing_day %></td>
+                        <% end %>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive text-nowrap">
+            <table class="table table-bordered table-fixed">
+                <thead class="thead-light">
+                    <tr style="text-align:center">
+                        <th class="label">基本給</th>
+                        <% if payroll.allowance_name_1 == nil? || payroll.allowance_name_1 == "" %>
+                            <th class="label">手当(1)</th>
+                        <% else %>
+                            <th class="label"><%= payroll.allowance_name_1 %></th>
+                        <% end %>
+                        <% if payroll.allowance_name_2 == nil? || payroll.allowance_name_2 == "" %>
+                            <th class="label">手当(2)</th>
+                        <% else %>
+                            <th class="label"><%= payroll.allowance_name_2 %></th>
+                        <% end %>
+                        <% if payroll.allowance_name_3 == nil? || payroll.allowance_name_3 == "" %>
+                            <th class="label">手当(3)</th>
+                        <% else %>
+                            <th class="label"><%= payroll.allowance_name_3 %></th>
+                        <% end %>
+                        <% if payroll.allowance_name_4 == nil? || payroll.allowance_name_4 == "" %>
+                            <th class="label">手当(4)</th>
+                        <% else %>
+                            <th class="label"><%= payroll.allowance_name_4 %></th>
+                        <% end %>
+                        <% if payroll.allowance_name_5 == nil? || payroll.allowance_name_5 == "" %>
+                            <th class="label">手当(5)</th>
+                        <% else %>
+                            <th class="label"><%= payroll.allowance_name_5 %></th>
+                        <% end %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= payroll.basic_salary %></td>
+                        <td><%= payroll.allowance_1 %></td>
+                        <td><%= payroll.allowance_2 %></td>
+                        <td><%= payroll.allowance_3 %></td>
+                        <td><%= payroll.allowance_4 %></td>
+                        <td><%= payroll.allowance_5 %></td>
+                    </tr>
+                </tbody>
+                <thead class="thead-light">
+                    <tr style="text-align:center">
+                        <th class="label">残業手当</th>
+                        <th class="label">休日手当</th>
+                        <th class="label">深夜手当</th>
+                        <th class="label">有給休暇手当</th>
+                        <th class="label">課税通勤手当</th>
+                        <th class="label">非課税通勤手当</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= payroll.overtime_allowance %></td>
+                        <td><%= payroll.holiday_allowance %></td>
+                        <td><%= payroll.midnight_allowance %></td>
+                        <td><%= payroll.paid_holiday_allowance %></td>
+                        <td><%= payroll.commutation_allowance_tax %></td>
+                        <td><%= payroll.commutation_allowance_nontax %></td>
+                    </tr>
+                </tbody>
+                <thead class="thead-light">
+                    <tr style="text-align:center">
+                        <th class="label">欠勤控除</th>
+                        <th class="label">遅早控除</th>
+                        <th></th>
+                        <th>課税計</th>
+                        <th>非課税計</th>
+                        <th>総支給額</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= payroll.leave_deduction_price %></td>
+                        <td><%= payroll.late_early_price %></td>
+                        <td></td>
+                        <td><%= payroll.basic_salary + payroll.overtime_allowance + payroll.holiday_allowance + payroll.midnight_allowance + payroll.allowance_1 + payroll.allowance_2 + payroll.allowance_3 + payroll.allowance_4 + payroll.allowance_5 + payroll.commutation_allowance_tax + payroll.paid_holiday_allowance - payroll.leave_deduction_price - payroll.late_early_price %></td>
+                        <td><%= payroll.commutation_allowance_nontax %></td>
+                        <td><%= payroll.basic_salary + payroll.overtime_allowance + payroll.holiday_allowance + payroll.midnight_allowance + payroll.allowance_1 + payroll.allowance_2 + payroll.allowance_3 + payroll.allowance_4 + payroll.allowance_5 + payroll.commutation_allowance_tax + payroll.paid_holiday_allowance - payroll.leave_deduction_price - payroll.late_early_price + payroll.commutation_allowance_nontax %></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered table-fixed">
+                <thead class="thead-light">
+                    <tr style="text-align:center">
+                        <th class="label">出勤日数</th>
+                        <th class="label">有給休暇日数</th>
+                        <th class="label">欠勤日数</th>
+                        <th class="label">労働時間(所定内)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= payroll.workday %></td>
+                        <td><%= payroll.paid_holiday %></td>
+                        <td><%= payroll.leave_deduction %></td>
+                        <td><%= payroll.normal_hours %></td>
+                    </tr>
+                </tbody>
+                <thead class="thead-light">
+                    <tr style="text-align:center">
+                        <th class="label">残業時間(1.25)</th>
+                        <th class="label">休日時間(1.35)</th>
+                        <th class="label">深夜時間(0.25)</th>
+                        <th class="label">遅早時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= payroll.overtime_hours %></td>
+                        <td><%= payroll.holiday_hours %></td>
+                        <td><%= payroll.midnight_hours %></td>
+                        <td><%= payroll.late_early %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <% @no += 1 %>
+    <% end %>
+    <% end %>
+</div>
+<% end %>

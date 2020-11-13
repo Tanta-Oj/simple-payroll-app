@@ -28,6 +28,7 @@ ja:
         updated_at: 更新日
         closing_date: 給与締日
         payday: 給与支払日
+        paymonth: 給与支払月
         basic_daily: 支払基礎日数
         allowance_1: 手当名(1)
         allowance_2: 手当名(2)
@@ -38,7 +39,7 @@ ja:
         pay_month: 支給月
         member_name: スタッフ名
         workday: 出勤日数
-        paid_holiday: 有給日数
+        paid_holiday: 有給休暇日数
         leave_deduction: 欠勤日数
         normal_hours: 労働時間(所定内)
         overtime_hours: 残業時間(1.25)
@@ -86,9 +87,10 @@ ja:
         allowance_3: 手当(3)
         allowance_4: 手当(4)
         allowance_5: 手当(5)
+        paid_holiday_price: 有給休暇単価
       members:
         workday: 出勤日数
-        paid_holiday: 有給日数
+        paid_holiday: 有給休暇日数
         leave_deduction: 欠勤日数
         normal_hours_h: 労働時間(所定内)/時
         overtime_hours_h: 残業時間(1.25)/時

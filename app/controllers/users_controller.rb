@@ -28,6 +28,25 @@ class UsersController < ApplicationController
         @user = User.includes(:members).find(current_user.id)
     end
 
+
+    # def new
+    #     @user = User.includes(:members).find(current_user.id)
+    # end
+
+    # def create
+    #     begin
+    #         @user = User.find(current_user.id)
+    #         ActiveRecord::Base.transaction do
+    #             if @user.create!(payroll_params)
+    #                 flash[:success] = "給与データを保存しました"
+    #                 redirect_to root_url
+    #             end
+    #         end
+    #     rescue
+    #         render "edit"
+    #     end
+    # end
+
 protected
     def if_logged_in_member
         if member_signed_in?
