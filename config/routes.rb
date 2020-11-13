@@ -28,7 +28,5 @@ Rails.application.routes.draw do
   get "/user/show" => "pages#user_show"
   get "/member/show" => "pages#member_show"
   get "/payroll/show" => "pages#payroll_show"
-  # get "/users/payroll" => "users#payroll"
-  # post "users/payroll" => "users#payment"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
