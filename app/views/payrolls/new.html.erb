@@ -1,0 +1,430 @@
+<%= render 'shared/flash_messages' %>
+
+<div class="container-payroll-new">
+    <h2>給与データ登録</h2>
+    <h3>共通事項</h3>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-bordered table-fixed">
+            <tbody>
+                <tr>
+                    <th class="textcenter">支給年月日</th>
+                    <% payday = @user.payday %>
+                    <% payday = "末" if payday == 31 %>
+                    <td><%= "#{@user.pay_year}年#{@user.pay_month}月#{payday}日" %></td>
+                    <% if @user.closing_date == nil || @user.closing_date == 0 %>
+                        <% @user.closing_date = 0 %>
+                    <% end %>
+                    <% if @user.payday == nil || @user.payday == 0 %>
+                        <% @user.payday = 0 %>
+                    <% end %>
+                    <% if @user.paymonth == nil || @user.paymonth == 0 %>
+                        <% @user.paymonth = 0 %>
+                    <% end %>
+                    <% if @user.pay_year == nil || @user.pay_year == 0 %>
+                        <% @user.pay_year = 0 %>
+                    <% end %>
+                    <% if @user.pay_month == nil || @user.pay_month == 0 %>
+                        <% @user.pay_month = 0 %>
+                    <% end %>
+                    <% if @user.closing_date > 0 && @user.payday > 0 && @user.paymonth > 0 && @user.pay_year > 0 && @user.pay_month %>
+                        <% cd = @user.closing_date %>
+                        <% cm = @user.pay_month %>
+                        <% cy = @user.pay_year %>
+                        <% if @user.paymonth == 2 %>
+                            <% cm -= 1 %>
+                            <% cm = 12 if cm == 0 %>
+                            <% cy -= 1 if cm == 12 %>
+                        <% end %>
+
+                        <% sd = cd + 1 %>
+                        <% sd = 1 if sd == 32 %>
+                        <% sm = cm - 1 %>
+                        <% sy = cy %>
+                        <% sy -= 1 if sm == 12 %>
+                        <% sm += 1 if sd == 1 %>
+                        <% sm = 12 if sm == 0 %>
+
+                        <% cd = "末" if cd == 31 %>
+                        <% sd = "末" if sd == 31 %>
+
+                        <% closing_day = "#{cy}年#{cm}月#{cd}日" %>
+                        <% stating_day = "#{sy}年#{sm}月#{sd}日" %>
+                            <th class="textcenter">自</th>
+                            <td class="verticalmiddle"><%= stating_day %></td>
+                            <th class="textcenter">至</th>
+                            <td class="verticalmiddle"><%= closing_day %></td>
+                    <% else %>
+                        <% stating_day = "" %>
+                        <% closing_day = "" %>
+                    <% end %>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <% if @user.closing_date > 0 && @user.payday > 0 && @user.paymonth > 0 && @user.pay_year > 0 && @user.pay_month %>
+    <% else %>
+        <p>※自至を登録するには、会社情報(給与締日・給与支払日・給与支払月)・勤怠データ一覧(支給年・支給月)を全て入力する必要があります</p>
+    <% end %>
+    <%= form_with( model: @form, url: payrolls_path, method: :post, local:true) do |fb| %>
+        <div class="table-responsive text-nowrap">
+            <table  class="table table-bordered table-fixed payrollnew">
+                <thead class="thead-light">
+                    <tr style="text-align:center">
+                        <th width="60px">登録</th>
+                        <th class="number">No</th>
+                        <th class="label">スタッフ名</th>
+                        <th class="label">基本給</th>
+                        <th class="label">残業手当</th>
+                        <th class="label">休日手当</th>
+                        <th class="label">深夜手当</th>
+                        <% if @user.allowance_1 == nil? || @user.allowance_1 == "" %>
+                            <th class="label">手当(1)</th>
+                        <% else %>
+                            <th class="label"><%= @user.allowance_1 %></th>
+                        <% end %>
+                        <% if @user.allowance_2 == nil? || @user.allowance_2 == "" %>
+                            <th class="label">手当(2)</th>
+                        <% else %>
+                            <th class="label"><%= @user.allowance_2 %></th>
+                        <% end %>
+                        <% if @user.allowance_3 == nil? || @user.allowance_3 == "" %>
+                            <th class="label">手当(3)</th>
+                        <% else %>
+                            <th class="label"><%= @user.allowance_3 %></th>
+                        <% end %>
+                        <% if @user.allowance_4 == nil? || @user.allowance_4 == "" %>
+                            <th class="label">手当(4)</th>
+                        <% else %>
+                            <th class="label"><%= @user.allowance_4 %></th>
+                        <% end %>
+                        <% if @user.allowance_5 == nil? || @user.allowance_5 == "" %>
+                            <th class="label">手当(5)</th>
+                        <% else %>
+                            <th class="label"><%= @user.allowance_5 %></th>
+                        <% end %>
+                        <th class="label">課税通勤手当</th>
+                        <th class="label">非課税通勤手当</th>
+                        <th class="label">有給休暇手当</th>
+                        <th class="label">欠勤控除</th>
+                        <th class="label">遅早控除</th>
+<% if false %>
+                        <th class="label">課税計</th>
+                        <th class="label">非課税計</th>
+                        <th class="label">総支給額</th>
+<% end %>
+                        <th class="label">出勤日数</th>
+                        <th class="label">有給休暇日数</th>
+                        <th class="label">欠勤日数</th>
+                        <th class="label">労働時間(所定内)</th>
+                        <th class="label">残業時間(1.25)</th>
+                        <th class="label">休日時間(1.35)</th>
+                        <th class="label">深夜時間(0.25)</th>
+                        <th class="label">遅早時間</th>
+                    </tr>
+                </thead>
+                <tbody class="bulk-registration-form">
+                    <% @no = 1 %>
+                    <% @user.members.each do |member| %>
+                        <%= fb.fields_for :payrolls do |f| %>
+                            <% if @user.basic_daily == nil || @user.basic_daily == "" %>
+                                <% @user.basic_daily = 0 %>
+                            <% end %>
+                            <% if @user.pay_year == nil %>
+                                <% @user.pay_year = "" %>
+                            <% end %>
+                            <% if @user.pay_month == nil %>
+                                <% @user.pay_month = "" %>
+                            <% end %>
+                            <% if @user.payday == nil %>
+                                <% @user.payday = "" %>
+                            <% end %>
+                            <% if @user.allowance_1 == nil %>
+                                <% @user.allowance_1 = "" %>
+                            <% end %>
+                            <% if @user.allowance_2 == nil %>
+                                <% @user.allowance_2 = "" %>
+                            <% end %>
+                            <% if @user.allowance_3 == nil %>
+                                <% @user.allowance_3 = "" %>
+                            <% end %>
+                            <% if @user.allowance_4 == nil %>
+                                <% @user.allowance_4 = "" %>
+                            <% end %>
+                            <% if @user.allowance_5 == nil %>
+                                <% @user.allowance_5 = "" %>
+                            <% end %>
+
+                            <% if member.pay_type == nil || member.pay_type == "" %>
+                                <% basic_salary = 0 %>
+                                <% paid_holiday_allowance = 0 %>
+                            <% end %>
+                            <% if member.basic_pay == nil || member.basic_pay == "" %>
+                                <% member.basic_pay = 0 %>
+                            <% end %>
+                            <% if member.overtime_price == nil || member.overtime_price == "" %>
+                                <% overtime_allowance = 0 %>
+                            <% end %>
+                            <% if member.holiday_price == nil || member.holiday_price == "" %>
+                                <% holiday_allowance = 0 %>
+                            <% end %>
+                            <% if member.midnight_price == nil || member.midnight_price == "" %>
+                                <% midnight_allowance = 0 %>
+                            <% end %>
+                            <% if member.commutation_type == nil || member.commutation_type == "" %>
+                                <% commutation_allowance_tax = 0 %>
+                                <% commutation_allowance_nontax = 0 %>
+                            <% end %>
+                            <% if member.commutation_tax == nil || member.commutation_tax == "" %>
+                                <% member.commutation_tax == 0 %>
+                            <% end %>
+                            <% if member.commutation_nontax == nil || member.commutation_nontax == "" %>
+                                <% member.commutation_nontax == 0 %>
+                            <% end %>
+                            <% if member.scheduled_hours_h == nil || member.scheduled_hours_h == "" %>
+                                <% member.scheduled_hours_h = 0 %>
+                            <% end %>
+                            <% if member.scheduled_hours_m == nil || member.scheduled_hours_m == "" || member.scheduled_hours_m == 0 %>
+                                <% scheduled_hours_m = 0 %>
+                            <% end %>
+                            <% if member.scheduled_hours_m != 0 %>
+                                <% scheduled_hours_m = member.scheduled_hours_m.to_f / 60 %>
+                            <% end %>
+                            <% if member.allowance_1 == nil || member.allowance_1 == "" %>
+                                <% member.allowance_1 = 0 %>
+                            <% end %>
+                            <% if member.allowance_2 == nil || member.allowance_2 == "" %>
+                                <% member.allowance_2 = 0 %>
+                            <% end %>
+                            <% if member.allowance_3 == nil || member.allowance_3 == "" %>
+                                <% member.allowance_3 = 0 %>
+                            <% end %>
+                            <% if member.allowance_4 == nil || member.allowance_4 == "" %>
+                                <% member.allowance_4 = 0 %>
+                            <% end %>
+                            <% if member.allowance_5 == nil || member.allowance_5 == "" %>
+                                <% member.allowance_5 = 0 %>
+                            <% end %>
+
+                            <% if member.workday == nil || member.workday == "" %>
+                                <% member.workday = 0 %>
+                            <% end %>
+                            <% if member.paid_holiday == nil || member.paid_holiday == "" %>
+                                <% member.paid_holiday = 0 %>
+                            <% end %>
+                            <% if member.leave_deduction == nil || member.leave_deduction == "" %>
+                                <% member.leave_deduction = 0 %>
+                            <% end %>
+                            <% if member.normal_hours_h == nil || member.normal_hours_h == "" %>
+                                <% member.normal_hours_h = 0 %>
+                            <% end %>
+                            <% if member.normal_hours_m == nil || member.normal_hours_m == "" || member.normal_hours_m == 0 %>
+                                <% normal_hours_m = 0 %>
+                            <% end %>
+                            <% if member.normal_hours_m != 0 %>
+                                <% normal_hours_m = member.normal_hours_m.to_f / 60 %>
+                            <% end %>
+                            <% if member.overtime_hours_h == nil || member.overtime_hours_h == "" %>
+                                <% member.overtime_hours_h = 0 %>
+                            <% end %>
+                            <% if member.overtime_hours_m == nil || member.overtime_hours_m == "" || member.overtime_hours_m == 0 %>
+                                <% overtime_hours_m = 0 %>
+                                <% member.overtime_hours_m = 0 %>
+                            <% end %>
+                            <% if member.overtime_hours_m != 0 %>
+                                <% overtime_hours_m = member.overtime_hours_m.to_f / 60 %>
+                            <% end %>
+                            <% if member.holiday_hours_h == nil || member.holiday_hours_h == "" %>
+                                <% member.holiday_hours_h = 0 %>
+                            <% end %>
+                            <% if member.holiday_hours_m == nil || member.holiday_hours_m == "" || member.holiday_hours_m == 0 %>
+                                <% holiday_hours_m = 0 %>
+                                <% member.holiday_hours_m = 0 %>
+                            <% end %>
+                            <% if member.holiday_hours_m != 0 %>
+                                <% holiday_hours_m = member.holiday_hours_m.to_f / 60 %>
+                            <% end %>
+                            <% if member.midnight_hours_h == nil || member.midnight_hours_h == "" %>
+                                <% member.midnight_hours_h = 0 %>
+                            <% end %>
+                            <% if member.midnight_hours_m == nil || member.midnight_hours_m == "" || member.midnight_hours_m == 0 %>
+                                <% midnight_hours_m = 0 %>
+                                <% member.midnight_hours_m = 0 %>
+                            <% end %>
+                            <% if member.midnight_hours_m != 0 %>
+                                <% midnight_hours_m = member.midnight_hours_m.to_f / 60 %>
+                            <% end %>
+                            <% if member.late_early_h == nil || member.late_early_h == "" %>
+                                <% member.late_early_h = 0 %>
+                            <% end %>
+                            <% if member.late_early_m == nil || member.late_early_m == "" || member.nlate_early_m == 0 %>
+                                <% late_early_m = 0 %>
+                                <% member.late_early_m = 0 %>
+                            <% end %>
+                            <% if member.late_early_m != 0 %>
+                                <% late_early_m = member.late_early_m.to_f / 60 %>
+                            <% end %>
+                            
+                            <% if member.pay_type == 1 %>
+                                <% basic_salary = member.basic_pay %>
+                            <% end %>
+                            <% if member.pay_type == 2 %>
+                                <% basic_salary = member.basic_pay * member.workday %>
+                            <% end %>
+                            <% if member.pay_type == 3 %>
+                                <% basic_salary = member.basic_pay * ( member.normal_hours_h + normal_hours_m ) %>
+                            <% end %>
+
+                            <% overtime_allowance = member.basic_pay * ( member.overtime_hours_h + overtime_hours_m ) %>
+                            <% holiday_allowance = member.basic_pay * ( member.holiday_hours_h + holiday_hours_m ) %>
+                            <% midnight_allowance = member.basic_pay * ( member.midnight_hours_h + midnight_hours_m ) %>
+
+                            <% if member.commutation_type == 1 %>
+                                <% commutation_allowance_tax = member.commutation_tax %>
+                                <% commutation_allowance_nontax = member.commutation_nontax %>
+                            <% end %>
+                            <% if member.commutation_type == 2 %>
+                                <% commutation_allowance_tax = member.commutation_tax * member.workday %>
+                                <% commutation_allowance_nontax = member.commutation_nontax * member.workday %>
+                            <% end %>
+
+                            <% if member.pay_type == 1 %>
+                                <% paid_holiday_allowance = 0 %>
+                            <% else %>
+                                <% if member.pay_type == 2 %>
+                                    <% paid_holiday_allowance = member.basic_pay * member.paid_holiday %>
+                                <% end %>
+                                <% if member.pay_type == 3 %>
+                                    <% paid_holiday_allowance = member.basic_pay * member.paid_holiday * ( member.scheduled_hours_h + scheduled_hours_m ) %>
+                                <% end %>
+                            <% end %>
+
+                            <% if member.pay_type == 1 %>
+                                <% if @user.basic_daily > 0  && member.leave_deduction > 0 %>
+                                    <% leave_deduction_price = member.basic_pay / @user.basic_daily * member.leave_deduction %>
+                                <% else %>
+                                    <% leave_deduction_price = 0  %>
+                                <% end %>
+                            <% else %>
+                                <% leave_deduction_price = 0  %>
+                            <% end %>
+                            
+                            <% if member.pay_type == 1 %>
+                                <% if @user.basic_daily > 0 && member.scheduled_hours_h + scheduled_hours_m > 0 %>
+                                    <% late_early_price = member.basic_pay / ( @user.basic_daily * ( member.scheduled_hours_h + scheduled_hours_m ) ) * ( member.late_early_h + late_early_m ) %>
+                                <% else %>
+                                    <% late_early_price_price = 0  %>
+                                <% end %>
+                            <% else %>
+                                <% late_early_price_price = 0  %>
+                            <% end %>
+
+                            <% normal_hours = "#{sprintf("%.2d", member.normal_hours_h)}:#{sprintf("%.2d", member.normal_hours_m)}" %>
+                            <% overtime_hours = "#{sprintf("%.2d", member.overtime_hours_h)}:#{sprintf("%.2d", member.overtime_hours_m)}" %>
+                            <% holiday_hours = "#{sprintf("%.2d", member.holiday_hours_h)}:#{sprintf("%.2d", member.holiday_hours_m)}" %>
+                            <% midnight_hours = "#{sprintf("%.2d", member.midnight_hours_h)}:#{sprintf("%.2d", member.midnight_hours_m)}" %>
+                            <% late_early = "#{sprintf("%.2d", member.late_early_h)}:#{sprintf("%.2d", member.late_early_m)}" %>
+
+                            <tr>
+                                <td class="text-center">
+                                    <div style="height:100%,width:100%"><%= f.check_box :availability, { checked: true }, class: 'top10 registration-checkbox' %></div>
+                                </td>
+                                <td style="text-align:right"><%= @no %></td>
+                                <td><%= member.name %></td>
+                                <td>
+                                    <%= f.number_field :basic_salary, value: basic_salary.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :overtime_allowance, value: overtime_allowance.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :holiday_allowance, value: holiday_allowance.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :midnight_allowance, value: midnight_allowance.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :allowance_1, value: member.allowance_1.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :allowance_2, value: member.allowance_2.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :allowance_3, value: member.allowance_3.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :allowance_4, value: member.allowance_4.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :allowance_5, value: member.allowance_5.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :commutation_allowance_tax, value: commutation_allowance_tax.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :commutation_allowance_nontax, value: commutation_allowance_nontax.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :paid_holiday_allowance, value: paid_holiday_allowance.round, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :leave_deduction_price, value: leave_deduction_price.floor, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :late_early_price, value: late_early_price_price.floor, class: 'form-control' %>
+                                </td>
+
+<% if false %>
+                                <td><%= basic_salary.round + overtime_allowance.round + holiday_allowance.round + midnight_allowance.round + member.allowance_1.round + member.allowance_2.round + member.allowance_3.round + member.allowance_4.round + member.allowance_5.round + commutation_allowance_tax.round + paid_holiday_allowance.round - leave_deduction_price.floor - late_early_price.floor %></td>
+                                <td><%= commutation_allowance_nontax.round %></td>
+                                <td><%= basic_salary.round + overtime_allowance.round + holiday_allowance.round + midnight_allowance.round + member.allowance_1.round + member.allowance_2.round + member.allowance_3.round + member.allowance_4.round + member.allowance_5.round + commutation_allowance_tax.round + paid_holiday_allowance.round - leave_deduction_price.floor - late_early_price.floor + commutation_allowance_nontax.round %></td>
+<% end %>
+
+                                <td>
+                                    <%= f.number_field :workday, value: member.workday, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :paid_holiday, value: member.paid_holiday, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.number_field :leave_deduction, value: member.leave_deduction, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.text_field :normal_hours, value: normal_hours, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.text_field :overtime_hours, value: overtime_hours, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.text_field :holiday_hours, value: holiday_hours, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.text_field :midnight_hours, value: midnight_hours, class: 'form-control' %>
+                                </td>
+                                <td>
+                                    <%= f.text_field :late_early, value: late_early, class: 'form-control' %>
+                                </td>
+                                <%= f.hidden_field :user_name, :value => @user.name %>
+                                <%= f.hidden_field :user_id, :value => @user.id %>
+                                <%= f.hidden_field :member_name, :value => member.name %>
+                                <%= f.hidden_field :member_id, :value => member.id %>
+                                <%= f.hidden_field :pay_day, :value => "#{@user.pay_year}年#{@user.pay_month}月#{@user.payday}日" %>
+                                <%= f.hidden_field :allowance_name_1, :value => @user.allowance_1 %>
+                                <%= f.hidden_field :allowance_name_2, :value => @user.allowance_2 %>
+                                <%= f.hidden_field :allowance_name_3, :value => @user.allowance_3 %>
+                                <%= f.hidden_field :allowance_name_4, :value => @user.allowance_4 %>
+                                <%= f.hidden_field :allowance_name_5, :value => @user.allowance_5 %>
+                                <%= f.hidden_field :stating_day, :value => stating_day %>
+                                <%= f.hidden_field :closing_day, :value => closing_day %>
+                            </tr>
+                            <% @no += 1 %>
+                        <% end %>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <%= fb.submit '一括登録', class: 'btn btn-primary btn-block' %>
+        </div>
+    <% end %>
+</div>

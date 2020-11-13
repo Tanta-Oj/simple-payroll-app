@@ -38,6 +38,22 @@
                 <td>末日</td>
             </tr>
         <% end %>
+        <% if @user.paymonth != 1 && @user.paymonth != 2 %>
+            <tr style="text-align:center">
+                <th><%= t("activerecord.attributes.user.paymonth") %></th>
+                <td></td>
+            </tr>
+        <% else %>
+            <tr style="text-align:center">
+                <th><%= t("activerecord.attributes.user.paymonth") %></th>
+                <% if @user.paymonth == 1 %>
+                    <td>当月</td>
+                <% end %>
+                <% if @user.paymonth == 2 %>
+                    <td>翌月</td>
+                <% end %>
+            </tr>
+        <% end %>
         <tr style="text-align:center">
             <th><%= t("activerecord.attributes.user.basic_daily") %></th>
             <td><%= ActiveSupport::NumberHelper.number_to_rounded(@user.basic_daily, precision: 30, strip_insignificant_zeros: true) %></td>

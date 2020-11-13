@@ -3,6 +3,8 @@ class Member < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   belongs_to :user
+  validates :user_id, presence: true
+  has_many :payrolls, dependent: :destroy
   default_scope -> { order(id: :asc) }
   validates :name, presence: true, length: {maximum: 30}
   validates :scheduled_hours_h, allow_blank: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 24}

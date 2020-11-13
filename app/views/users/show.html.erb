@@ -1,7 +1,7 @@
 <%= render 'shared/flash_messages' %>
 
 <div class="container-show-list">
-    <h2>勤怠データ</h2>
+    <h2>勤怠データ一覧</h2>
     <%= bootstrap_user_error_messages! %>
 
     <h3>共通事項</h3>
@@ -115,7 +115,7 @@
         </div>
         <div class="width5"></div>
         <div class="form-group width45">
-            <%= link_to "給与計算", edit_user_path, class: 'btn btn-info btn-block' %>
+            <%= link_to "給与計算", new_payroll_path, class: 'btn btn-info btn-block' %>
         </div>
     </div>
 </div>
