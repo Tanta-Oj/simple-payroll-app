@@ -6,6 +6,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:tanaka)
     @member = members(:member2)
+    @payroll = payrolls(:one)
   end
 
   test "should get home" do
@@ -13,7 +14,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should cant't get user show" do
+  test "should can't get user show" do
     get user_show_path
     assert_not flash.empty?
     assert_redirected_to new_member_session_url
@@ -51,4 +52,23 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should can't get payroll show" do
+    get payroll_show_path
+    assert_not flash.empty?
+    assert_redirected_to new_member_session_url
+  end
+
+  test "should get payroll show when logged in as user" do
+    get root_path
+    sign_in @user
+    get payroll_show_path
+    assert_response :success
+  end
+
+  test "should get payroll show when logged in as member" do
+    get root_path
+    sign_in @member
+    get payroll_show_path
+    assert_response :success
+  end
 end

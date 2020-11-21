@@ -27,6 +27,9 @@
     <div class="table-responsive text-nowrap">
         <table class="table table-bordered table-fixed">
             <thead class="thead-light">
+                <tr>
+                    <th colspan="6" class="textcenter catergory">支給項目</th>
+                </tr>
                 <tr style="text-align:center">
                     <th class="label">基本給</th>
                     <% if @payroll.allowance_name_1 == nil? || @payroll.allowance_name_1 == "" %>
@@ -110,6 +113,9 @@
 
         <table class="table table-bordered table-fixed">
             <thead class="thead-light">
+                <tr>
+                    <th colspan="6" class="textcenter catergory">勤怠項目</th>
+                </tr>
                 <tr style="text-align:center">
                     <th class="label">出勤日数</th>
                     <th class="label">有給休暇日数</th>

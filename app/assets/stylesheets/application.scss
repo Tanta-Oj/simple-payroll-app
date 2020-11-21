@@ -50,11 +50,11 @@
 // header
 header {
   background-color: #2B669F;
-  .navbar-light .navbar-brand {
+  .navbar-brand {
     color: #fff;
     font-size: 2rem;
   }
-  .navbar-light .navbar-nav .active > .nav-link {
+  .navbar-nav .active > .nav-link {
     color: #fff;
   }
 }
@@ -787,5 +787,9 @@ header {
     width: 30%;
     min-width: 256px;
     margin-top: 15px;
+  }
+
+  th.catergory {
+    background-color: #fff;
   }
 }

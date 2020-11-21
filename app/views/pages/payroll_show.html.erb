@@ -73,6 +73,9 @@
                     <th class="label">有給休暇手当</th>
                     <th class="label">欠勤控除</th>
                     <th class="label">遅早控除</th>
+                    <th class="label">課税計</th>
+                    <th class="label">非課税計</th>
+                    <th class="label">総支給額</th>
                     <th class="label">出勤日数</th>
                     <th class="label">有給休暇日数</th>
                     <th class="label">欠勤日数</th>
@@ -105,6 +108,9 @@
                         <td><%= payroll.paid_holiday_allowance %></td>
                         <td><%= payroll.leave_deduction_price %></td>
                         <td><%= payroll.late_early_price %></td>
+                        <td><%= payroll.basic_salary + payroll.overtime_allowance + payroll.holiday_allowance + payroll.midnight_allowance + payroll.allowance_1 + payroll.allowance_2 + payroll.allowance_3 + payroll.allowance_4 + payroll.allowance_5 + payroll.commutation_allowance_tax + payroll.paid_holiday_allowance - payroll.leave_deduction_price - payroll.late_early_price %></td>
+                        <td><%= payroll.commutation_allowance_nontax %></td>
+                        <td><%= payroll.basic_salary + payroll.overtime_allowance + payroll.holiday_allowance + payroll.midnight_allowance + payroll.allowance_1 + payroll.allowance_2 + payroll.allowance_3 + payroll.allowance_4 + payroll.allowance_5 + payroll.commutation_allowance_tax + payroll.paid_holiday_allowance - payroll.leave_deduction_price - payroll.late_early_price + payroll.commutation_allowance_nontax %></td>
                         <td><%= payroll.workday %></td>
                         <td><%= payroll.paid_holiday %></td>
                         <td><%= payroll.leave_deduction %></td>
@@ -176,6 +182,9 @@
         <div class="table-responsive text-nowrap">
             <table class="table table-bordered table-fixed">
                 <thead class="thead-light">
+                    <tr>
+                        <th colspan="6" class="textcenter catergory">支給項目</th>
+                    </tr>
                     <tr style="text-align:center">
                         <th class="label">基本給</th>
                         <% if payroll.allowance_name_1 == nil? || payroll.allowance_name_1 == "" %>
@@ -259,6 +268,9 @@
 
             <table class="table table-bordered table-fixed">
                 <thead class="thead-light">
+                    <tr>
+                        <th colspan="6" class="textcenter catergory">勤怠項目</th>
+                    </tr>
                     <tr style="text-align:center">
                         <th class="label">出勤日数</th>
                         <th class="label">有給休暇日数</th>
