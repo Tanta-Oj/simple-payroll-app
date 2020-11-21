@@ -1,9 +1,38 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_name: MyString
-  member_name: MyString
-
-two:
-  user_name: MyString
-  member_name: MyString
+  user_name: "Tanaka"
+  member_name: "Member 2"
+  pay_day: ""
+  stating_day: ""
+  closing_day: ""
+  workday: ""
+  paid_holiday: ""
+  leave_deduction: ""
+  normal_hours: ""
+  overtime_hours: ""
+  holiday_hours: ""
+  midnight_hours: ""
+  late_early: ""
+  allowance_name_1: ""
+  allowance_name_2: ""
+  allowance_name_3: ""
+  allowance_name_4: ""
+  allowance_name_5: ""
+  basic_salary: 0
+  overtime_allowance: 0
+  holiday_allowance: 0
+  midnight_allowance: 0
+  paid_holiday_allowance: 0
+  commutation_allowance_tax: 0
+  commutation_allowance_nontax: 0
+  leave_deduction_price: 0
+  late_early_price: 0
+  allowance_1: 0
+  allowance_2: 0
+  allowance_3: 0
+  allowance_4: 0
+  allowance_5: 0
+  user: tanaka
+  member: member2
+  availability: true

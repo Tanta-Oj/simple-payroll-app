@@ -32,9 +32,10 @@ class PayrollsController < ApplicationController
     end
 
     def show
-        if Payroll.find(params[:id]).user_id == current_user.id
-            @user = User.find(current_user.id)
-            @payroll = Payroll.find(params[:id])
+        @user = current_user
+        @payroll = Payroll.find(params[:id])
+        if @user.id != Payroll.find(params[:id]).user_id
+            redirect_to root_url
         end
     end
 

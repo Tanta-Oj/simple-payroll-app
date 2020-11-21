@@ -219,6 +219,7 @@
                             <% end %>
                             <% if member.normal_hours_m == nil || member.normal_hours_m == "" || member.normal_hours_m == 0 %>
                                 <% normal_hours_m = 0 %>
+                                <% member.normal_hours_m = 0 %>
                             <% end %>
                             <% if member.normal_hours_m != 0 %>
                                 <% normal_hours_m = member.normal_hours_m.to_f / 60 %>
@@ -256,7 +257,7 @@
                             <% if member.late_early_h == nil || member.late_early_h == "" %>
                                 <% member.late_early_h = 0 %>
                             <% end %>
-                            <% if member.late_early_m == nil || member.late_early_m == "" || member.nlate_early_m == 0 %>
+                            <% if member.late_early_m == nil || member.late_early_m == "" || member.late_early_m == 0 %>
                                 <% late_early_m = 0 %>
                                 <% member.late_early_m = 0 %>
                             <% end %>
